@@ -1,6 +1,9 @@
 body {
   background-color: rgb(10, 10, 10);
 }
+#albumPage {
+  padding-bottom: 100px;
+}
 h1.generalHaeding {
   font-size: 30px;
   width: 300px;
