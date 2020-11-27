@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 class ArtistCard extends React.Component {
   state = {
-    genre: "jazz",
+    genre: 152,
     artists: [],
     loading: true,
   };
@@ -19,14 +19,14 @@ class ArtistCard extends React.Component {
       this.setState({ genre: this.props.genre });
       this.setState({ loading: true });
       console.log("GENRE ON Update BEFORE FETCHING", this.state.genre);
-      this.fetchArtists(this.props.genre);
+      this.fetchArtists();
       console.log("GENRE ON Update AFTER FETCHING", this.state.genre);
     }
   };
-  fetchArtists = async (genre) => {
+  fetchArtists = async (g) => {
     let response = await fetch(
       `https://deezerdevs-deezer.p.rapidapi.com/genre/` +
-        this.state.genre +
+        this.props.genre +
         `/artists`,
       {
         method: "GET",

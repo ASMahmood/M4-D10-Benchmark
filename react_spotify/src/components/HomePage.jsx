@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 
 class HomePage extends React.Component {
   state = {
-    genre: "rock",
+    genre: 152,
   };
   fetchGenre = (selectedGenre) => {
     this.setState({ genre: selectedGenre });
