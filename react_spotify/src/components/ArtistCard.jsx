@@ -1,29 +1,33 @@
 import React from "react";
-import { Col, Card } from "react-bootstrap";
+import { Col, Card, Alert, Spinner } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 
 class ArtistCard extends React.Component {
   state = {
-    genre: "rock",
+    genre: "jazz",
     artists: [],
     loading: true,
   };
   componentDidMount = () => {
-    console.log(this.props.genre);
+    console.log("GENRE ON Mount IN ArtistCard", this.props.genre);
     this.setState({ genre: this.props.genre });
     this.fetchArtists();
   };
   componentDidUpdate = (prevProps, prevState) => {
     if (prevProps.genre !== this.props.genre) {
-      console.log("differnet genre");
+      console.log("PREVIOUS GENRE IS DIFFERENT TO THIS ONE");
       this.setState({ genre: this.props.genre });
       this.setState({ loading: true });
-      this.fetchArtists();
+      console.log("GENRE ON Update BEFORE FETCHING", this.state.genre);
+      this.fetchArtists(this.props.genre);
+      console.log("GENRE ON Update AFTER FETCHING", this.state.genre);
     }
   };
-  fetchArtists = async () => {
+  fetchArtists = async (genre) => {
     let response = await fetch(
-      `https://deezerdevs-deezer.p.rapidapi.com/genre/${this.state.genre}/artists`,
+      `https://deezerdevs-deezer.p.rapidapi.com/genre/` +
+        this.state.genre +
+        `/artists`,
       {
         method: "GET",
         headers: {
@@ -40,23 +44,37 @@ class ArtistCard extends React.Component {
   };
   render() {
     if (this.state.artists) {
-      return this.state.artists.map((artist, index) => (
-        <Col
-          xs={12}
-          sm={6}
-          lg={4}
-          xl={2}
-          key={index}
-          onClick={() => this.props.history.push("/artist/" + artist.id)}
-        >
-          <Card>
-            <Card.Img variant="top" src={artist.picture_xl} alt="artistImage" />
-            <Card.Body>
-              <Card.Text className="text-center">{artist.name}</Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-      ));
+      if (this.state.loading === true) {
+        return (
+          <div className="w-100 text-center" style={{ color: "white" }}>
+            Loading... <Spinner animation="border" variant="primary" />
+          </div>
+        );
+      } else {
+        return this.state.artists.map((artist, index) => (
+          <Col
+            xs={12}
+            sm={6}
+            lg={4}
+            xl={2}
+            key={index}
+            onClick={() => this.props.history.push("/artist/" + artist.id)}
+          >
+            <Card>
+              <Card.Img
+                variant="top"
+                src={artist.picture_xl}
+                alt="artistImage"
+              />
+              <Card.Body>
+                <Card.Text className="text-center">{artist.name}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ));
+      }
+    } else {
+      return <h1>uh oh</h1>;
     }
   }
 }

@@ -9,10 +9,16 @@ class HomePage extends React.Component {
   };
   fetchGenre = (selectedGenre) => {
     this.setState({ genre: selectedGenre });
+    console.log("GENRE IN HomePage", this.state.genre);
   };
   render() {
     return (
-      <Container fluid id="mainBody">
+      <Container
+        fluid
+        id="mainBody"
+        className="color-change-5x"
+        style={{ paddingBottom: "100px" }}
+      >
         <HomeNav getGenre={this.fetchGenre} />
         <HomeBody genre={this.state.genre} />
       </Container>

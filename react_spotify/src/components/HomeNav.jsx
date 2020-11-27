@@ -5,21 +5,21 @@ class HomeNav extends React.Component {
   render() {
     return (
       <Container fluid>
-        <Row className="mt-4 align-items-center justify-content-center mb-5">
+        <Row className="pt-4 align-items-center justify-content-center mb-5">
           <ListGroup horizontal>
-            <ListGroup.Item onClick={() => this.props.getGenre("Rock")}>
+            <ListGroup.Item onClick={() => this.props.getGenre(152)}>
               Rock
             </ListGroup.Item>
-            <ListGroup.Item onClick={() => this.props.getGenre("Pop")}>
+            <ListGroup.Item onClick={() => this.props.getGenre(132)}>
               Pop
             </ListGroup.Item>
-            <ListGroup.Item onClick={() => this.props.getGenre("Rap")}>
+            <ListGroup.Item onClick={() => this.props.getGenre(116)}>
               Rap
             </ListGroup.Item>
-            <ListGroup.Item onClick={() => this.props.getGenre("Weeb")}>
+            <ListGroup.Item onClick={() => this.props.getGenre(173)}>
               Weeb
             </ListGroup.Item>
-            <ListGroup.Item onClick={() => this.props.getGenre("Jazz")}>
+            <ListGroup.Item onClick={() => this.props.getGenre(129)}>
               Jazz
             </ListGroup.Item>
           </ListGroup>

@@ -7,6 +7,7 @@ import FooterPlayer from "./components/FooterPlayer";
 import HomePage from "./components/HomePage";
 import ArtistPage from "./components/ArtistPage";
 import AlbumPage from "./components/AlbumPage";
+import "./App.css";
 
 class App extends React.Component {
   state = {
