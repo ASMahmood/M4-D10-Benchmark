@@ -9,6 +9,14 @@ import ArtistPage from "./components/ArtistPage";
 import AlbumPage from "./components/AlbumPage";
 
 class App extends React.Component {
+  state = {
+    song: {},
+    image: "",
+  };
+  selectedSong = (selected, image) => {
+    this.setState({ song: selected });
+    this.setState({ image: image });
+  };
   render() {
     return (
       <BrowserRouter>
@@ -18,8 +26,13 @@ class App extends React.Component {
           path="/artist/:id"
           render={(props) => <ArtistPage {...props} />}
         />
-        <Route path="/album/:id" render={(props) => <AlbumPage {...props} />} />
-        <FooterPlayer />
+        <Route
+          path="/album/:id"
+          render={(props) => (
+            <AlbumPage selectedSong={this.selectedSong} {...props} />
+          )}
+        />
+        <FooterPlayer song={this.state.song} image={this.state.image} />
       </BrowserRouter>
     );
   }
